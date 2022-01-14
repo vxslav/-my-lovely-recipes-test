@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Victoria Slavkova">
+    <meta name="description" content="My website for amazing recipes, so that you never run out of fresh ideas!">
+    <meta name="keywords" content="cookbook, recipes, recipe, food, delicious, tasty, cook">
+    <title>My Lovely Recipes</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><img src="public/img/logo.png" width="50px" alt="logo"></li>
+                <li><a href="#all">ALL RECIPES</a></li>
+                <li><a href="#favs">MY FAVOURITES</a></li>
+                <li><a href="#create">CREATE A RECIPE</a></li>
+                <li><a href="#profile">MY PROFILE</a></li>
+                <li id="loginRegLinks"><a href="#login">Login</a>/<a href="#register">Register</a></li>
+                <li id="logoutLink"><a href="#logout">Logout</a></li>
+                <li><img id="nav-avatar" src="public/img/guest.png" width="50px" alt="user-avatar"></li>
+            </ul>
+        </nav>
+    </header>
+    <li><a href="#login">Login</a>/<a href="#register">Register</a></li>
+    <main>
+        <div id="filter">
+            <div>
+                <label for="select">Filter by ingredients:</label>
+                <select name="" id="select">
+                    <option value="">all</option>
+                </select>
+            </div>
+            <div>
+                <label for="search">Filter by title: </label>
+                <input type="text" id="search">
+            </div>
+        </div>
+        <section id="all"></section>
+        <section id="favs"></section>
+        <section id="create">
+            <h2>Create your own recipe!</h2>
+            <form action="" method="post" id="create-recipe">
+                <input name="title" type="text" placeholder="Recipie title" class="recipe-form">
+                <textarea name="ingredients" cols="43" rows="2" placeholder="Ingredients"
+                    class="recipe-form"></textarea>
+                <input name="recipe_link" type="url" placeholder="Link to full recipe" class="recipe-form">
+                <input name="recipe_image" type="url" placeholder="Image URL" class="recipe-form">
+                <button id="submit-recipe" disabled>Submit Recipe</button>
+            </form>
+        </section>
+        <section id="profile">
+            <script id="user-info" type="text/x-handlebars-template">
+                <img id="profile-pic" src="{{avatar}}" width="150px" alt="profile pic">
+                <h3>Name: {{name}}</h3>
+                <p>Age: {{age}}</p>
+                <p>Address: {{address}}</p>
+            </script>
+            <div id="profile-box"></div>
+            <form action="" id="edit-profile">
+                <input type="text" placeholder="Your name" class="profile-inputs">
+                <input type="number" placeholder="Your age" class="profile-inputs">
+                <input type="text" placeholder="Address" class="profile-inputs">
+                <input type="url" placeholder="Image URL" class="profile-inputs">
+                <div>
+                    <button id="edit-profile-btn">Edit Profile</button>
+                    <button id="delete-profile-btn">Delete Profile</button>
+                    <button id="changePassBtn">Change Password</button>
+                </div>
+
+            </form>
+            <div id="changePass">
+                <p id="pass-change-msg"></p>
+                <form action="#" id="changePassForm" method="post">
+                    <input type="password" id="currentPass" placeholder="Current Password">
+                    <input type="password" id="newPass" placeholder="New Password">
+                    <input type="password" id="confirmNewPass" placeholder="Confirm New Password">
+                    <input type="submit" value="Change password">
+                </form>
+            </div>
+            <table id="cooked-table">
+
+            </table>
+        </section>
+        <section id="loginReg">
+            <form action="" class="logreg-forms" id="registerForm">
+                <h3>REGISTER</h3>
+                <input type="text" placeholder="Username" id="reg-username">
+                <input type="password" placeholder="Password" id="reg-password">
+                <input type="password" placeholder="Confirm Password" id="reg-password2">
+                <p class="error-msg"></p>
+                <button id="register-btn">Register</button>
+                <a href="#login">Already have an account? Login here!</a>
+            </form>
+
+            <form action="" class="logreg-forms" id="loginForm">
+                <p class="success" id="success-msg">You are now registered, please log in to proceed!</p>
+                <h3>LOGIN</h3>
+                <input type="text" placeholder="Username" id="log-username">
+                <input type="password" placeholder="Password" id="log-pass">
+                <p class="error-msg">Authentication failed!</p>
+                <button id="login-btn">Login</button>
+                <a href="#register">Don`t have an account yet? Register here!</a>
+            </form>
+        </section>
+        <section id="error">
+            <div>
+                <h3>404: PAGE NOT FOUND!</h3>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Website created by: Victoria Slavkova</p>
+        <p>All Rights Reserved &copy; 2021</p>
+    </footer>
+    <!-- Javascript -->
+    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="public/js/recipeList.js"></script>
+    <script src="public/js/modal/Recipe.js"></script>
+    <script src="public/js/modal/User.js"></script>
+    <script src="public/js/util.js"></script>
+    <script src="public/js/const.js"></script>
+
+    <script src="public/js/index.js"></script>
+    <script src="public/js/controller/loginController.js"></script>
+    <script src="public/js/controller/registerController.js"></script>
+    <script src="public/js/controller/recipeController.js"></script>
+    <script src="public/js/controller/profileController.js"></script>
+    <script src="public/js/router.js"></script>
+    <script id="recipe-card-all" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="content-card">
+            <a href='{{url}}'  target="_blank">
+             <img src='{{img}}' width="200px" alt="Recipe">
+         </a>
+         <h3>{{title}}</h3>
+         <p>{{ingredients}}</p>
+         <div>
+             <button class="card-btn add">{{#if (isFavourite id)}}Remove from Favourites{{else}}Add to Favourites{{/if}}</button>
+             <button class="card-btn cook">Cook</button>
+         </div>
+        </div>
+        {{/each}}
+     </script>
+     <script id="recipe-card-fav" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="content-card">
+            <a href='{{url}}'  target="_blank">
+             <img src='{{img}}' width="200px" alt="Recipe">
+         </a>
+         <h3>{{title}}</h3>
+         <p>{{ingredients}}</p>
+         <div>
+             <button class="card-btn remove">Remove from Favourites</button>
+             <button class="card-btn cookFav">Cook</button>
+         </div>
+        </div>
+        {{/each}}
+     </script>
+</body>
+
+</html>

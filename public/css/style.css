@@ -1,0 +1,228 @@
+html,body {
+    margin:0;
+    padding:0;
+}
+header {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top:0;
+    width:100%;
+    height: 70px;
+    background-color: rgb(248, 166, 134);
+}
+nav {
+    width:100%;
+}
+ul {
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+li {
+    list-style-type: none;
+}
+li:first-child {
+    margin-left: -80px;
+}
+li:last-child {
+    margin-right: -80px;
+}
+nav ul li a {
+    text-decoration: none;
+    color:#000;
+    border: 2px solid black;
+    border-radius: 25%;
+    padding: 10px 20px;
+}
+ul li a:hover {
+    background-color: rgb(173, 10, 10);
+    color:#fff;
+    border:none;
+}
+ul li:nth-child(6) a,ul li:nth-child(7) a  {
+    border: none;
+    padding: 5px;
+    text-decoration: underline;
+}
+#nav-avatar {
+    border-radius: 50%;
+}
+main {
+    margin: 100px 20px 20px 20px;
+    min-height: 70vh;
+}
+#all {  
+    flex-flow:row wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.content-card {
+    width: 200px;
+    display:flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+.card-btn {
+    border-radius: 10px;
+    background-color: rgb(255, 163, 43);
+    border:none;
+    padding: 5px 10px;
+    margin-bottom:10px;
+}
+
+#profile {
+    flex-flow:column wrap;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}
+
+#edit-profile {
+    display:flex;
+    flex-flow:column wrap;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
+#edit-profile-btn {
+    background-color: rgb(51, 185, 51);
+    width: 100px;
+}
+#delete-profile-btn {
+    background-color: rgb(173, 10, 10);
+    width:100px;
+}
+.profile-inputs {
+    width:300px;
+    padding:10px;
+}
+#filter {
+    flex-flow:row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 10px 20px ;
+    gap: 20px;
+}
+#filter > input, select {
+    width: 200px;
+    padding: 5px 10px;
+}
+footer {
+    width:100%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(255, 163, 43);
+}
+#create {
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+#create-recipe {
+    display:flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+}
+h2 {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.7);
+    margin-bottom: 50px;
+}
+#create-recipe input {
+    padding: 5px 10px;
+    width: 300px;
+}
+#cooked-table {
+    margin-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.7);
+}
+#favs {
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items:stretch;
+    gap:10px;
+}
+table, th, td {
+    border: 1px solid rgba(0,0,0,0.5);
+}
+table {
+    width: 320px;
+}
+#loginReg {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logreg-forms{
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    justify-content: center;
+    padding: 10px;
+}
+.logreg-forms > h3 {
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    padding: 15px;
+    letter-spacing: 1px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(0,0,0,0.5);
+    font-size: 24px;
+}
+
+.logreg-forms > input {
+    padding: 10px;
+    border : none;
+    border-bottom: 1px solid rgba(0,0,0,0.7)
+}
+.logreg-forms > button {
+    background-color:rgba(255, 163, 43, 0.7);
+    border: 1px solid rgb(173, 10, 10);
+    padding: 10px 0;
+    border-radius: 20px;
+}
+.logreg-forms > button:hover {
+    background-color:rgb(255, 163, 43);
+}
+.error-msg {
+    display:none;
+    color: rgb(218, 21, 21);
+    font-weight: 700;
+    text-indent: 50px;
+}
+#success-msg {
+    display: none;
+    background-color: rgba(56, 197, 56, .4);
+    color: rgb(7, 109, 7);
+    width: 500px;
+    height: 30px;
+    text-align: center;
+    padding: 10px 0px 0px;
+    border-radius: 5px;
+}
+#pass-change-msg {
+    display:none;
+    background-color: rgba(223, 52, 52,.4);
+    color: rgb(156, 4, 4);
+    text-indent: 10px;
+}
+#changePass {
+    display: none;
+}
+#changePass form {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
