@@ -11,5 +11,5 @@ function getByClass(className) {
     return document.getElementsByClassName(className);
 }
 Handlebars.registerHelper('isFavourite', function (id) {
-   return user.favourites.find(obj => obj.id === id) ? true : false;
+   return user.favourites.indexOf(id) > -1 ? true : false;
 })

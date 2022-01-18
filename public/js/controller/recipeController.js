@@ -5,7 +5,8 @@ for (let i = 0; i < allRecipes.length; i++) {
         allRecipes[i].title,
         allRecipes[i].href,
         allRecipes[i].ingredients,
-        allRecipes[i].thumbnail
+        allRecipes[i].thumbnail,
+        0
     );
     handler.add(recipe);
 }

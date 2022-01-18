@@ -4,14 +4,15 @@ function displayCooked() {
                 <th colspan="2">My cooked meals</th>
             </tr>
     `;
-    for (let i = 0; i < user.cooked.length; i++) {
+    user.cooked.forEach((e,i) => {
         let item = document.createElement("tr");
         TABLE.appendChild(item);
-        item.innerHTML = `
-            <td>${user.cooked[i].title}</td>
+        let recipe = recipesAll.find(el => el.id === e.id);
+         item.innerHTML = `
+            <td>${recipe.title}</td>
             <td>${user.cooked[i].timesCooked}</td>
         `;
-    }
+    })
 }
 function checkInputs(inputs, btn) {
     let areFilled = true;
@@ -47,18 +48,18 @@ function displayAll(recipes = recipesAll) {
     }
     cookBtns.forEach((btn, i) => {
         btn.addEventListener("click", () => {
-            userStorage.cook.call(user, recipes[i])
+            userStorage.cook.call(user, recipes[i].id)
         })
     })
     favsBtns.forEach((btn, i) => {
         btn.addEventListener("click", e => {
-            if (user.favourites.find(obj => obj.id == recipes[i].id)) {
+            if(user.favourites.indexOf(recipes[i].id) > -1){    
                 e.target.innerText = "Add to Favourites";
-                userStorage.removeFromFavs.call(user, recipes[i]);
+                userStorage.removeFromFavs.call(user, recipes[i].id);
             }
             else {
                 e.target.innerText = "Remove from Favourites";
-                userStorage.addToFavs.call(user, recipes[i]);
+                userStorage.addToFavs.call(user, recipes[i].id);
             }
         })
     })
@@ -69,18 +70,20 @@ function displayFavs() {
         ) : user;
     let favsHTML = getById("recipe-card-fav").innerHTML;
     const template = Handlebars.compile(favsHTML);
-    let htmlCard = template(recipesFav);
+    const recipesIds = user.favourites;
+    let userFavs = recipesAll.filter(e => recipesIds.indexOf(e.id) > -1)
+    let htmlCard = template(userFavs);
     FAV.innerHTML = htmlCard;
     let cookBtns = Array.from(getByClass("cookFav"));
     let favsBtns = Array.from(getByClass("remove"));
     cookBtns.forEach((btn, i) => {
         btn.addEventListener("click", () => {
-            userStorage.cook.call(user, recipesFav[i])
+            userStorage.cook.call(user, userFavs[i].id)
         })
     })
     favsBtns.forEach((btn, i) => {
         btn.addEventListener("click", () => {
-            userStorage.removeFromFavs.call(user, recipesFav[i]);
+            userStorage.removeFromFavs.call(user, userFavs[i].id);
         })
     })
 }

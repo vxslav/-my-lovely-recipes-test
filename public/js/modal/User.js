@@ -5,9 +5,9 @@ class User {
             this.cooked = [],
             this.favourites = [],
             this.avatar = "public/img/guest.png",
-            this.name = username,
-            this.age = 0,
-            this.address = "City"
+            this.name = "Guest",
+            this.age = "Your Age",
+            this.address = "Your City"
     }
 }
 //all user-related functions and storage
@@ -21,7 +21,7 @@ let userStorage = (function () {
             this.users = JSON.parse(localStorage.getItem('users'))
             this.users.forEach(obj => Object.setPrototypeOf(obj, User.prototype));
         }
-        // profile-related functions
+// profile-related functions
         exists(username) {
             return this.users.some(u => u.username === username);
         }
@@ -71,35 +71,37 @@ let userStorage = (function () {
                 localStorage.setItem('users', JSON.stringify(this.users))
             }
         }
-        // recipe-related functions ==========================================================
-        addToFavs(recipe) {
-            if (this.favourites.findIndex(obj => obj.id === recipe.id) === -1) {
-                this.favourites.unshift(recipe);
+// user-recipe-related functions ==========================================================
+        addToFavs(id) {
+            if(this.favourites.indexOf(id) === -1) {
+                this.favourites.unshift(id);
                 localStorage.setItem("users", JSON.stringify(userStorage.users));
                 pageLoad();
             }
         }
-        removeFromFavs(recipe) {
-            let i = this.favourites.findIndex(obj => obj.id === recipe.id);
+        removeFromFavs(id) {
+            let i = this.favourites.indexOf(id);
             if (i > -1) {
                 this.favourites.splice(i, 1);
                 localStorage.setItem("users", JSON.stringify(userStorage.users));
                 pageLoad();
             }
         }
-        cook(recipe) {
-            let recipeObj = this.cooked.find(obj => obj.recipe_id === recipe.id);
+        cook(id) {
+            let recipe = handler.recipes.find(e => e.id === id);
+            recipe.cooked++;
+            let recipeObj = this.cooked.find(obj => obj.id === id);
             if (recipeObj) {
                 recipeObj.timesCooked++;
             }
             else {
                 this.cooked.unshift({
-                    recipe_id: recipe.id,
-                    title: recipe.title,
+                    id: id,
                     timesCooked: 1
                 });
             }
             localStorage.setItem("users", JSON.stringify(userStorage.users));
+            localStorage.setItem("recipes", JSON.stringify(handler.recipes));
             pageLoad();
         }
     }

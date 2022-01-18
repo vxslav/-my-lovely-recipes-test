@@ -29,34 +29,35 @@ function editProfile() {
     printProfile();
 }
 // password change
+function showMsg(info, display, color, bg) {
+    let msg = getById("pass-change-msg");
+    msg.innerText = info; 
+    msg.style.display = display; 
+    msg.style.color = color;
+    msg.style.backgroundColor = bg;
+}
 function changeUserPass() {
     let current = getById("currentPass");
     let newPass = getById("newPass");
     let confirmNewPass = getById("confirmNewPass");
-    let msg = getById("pass-change-msg");
+    
     if (current.value === user.password) {
         if (newPass.value === confirmNewPass.value) {
             userStorage.changePassword(user, current.value, newPass.value, confirmNewPass.value);
-            msg.innerText = "Password successfully updated!";
-            msg.style.display = "block";
-            msg.style.color = "green";
-            msg.style.backgroundColor = "rgba(38, 240, 105,.4)";
+            let info = "Password successfully updated!"
+            showMsg(info, "block", "green", "rgba(38, 240, 105,.4)")
             current.value = "";
             newPass.value = "";
             confirmNewPass.value = "";
         }
         else {
-            msg.innerText = "Password missmatch!";
-            msg.style.display = "block";
-            msg.style.color = "rgb(156, 4, 4)";
-            msg.style.backgroundColor = "rgba(223, 52, 52,.4);";
+            let info = "Password missmatch!";
+            showMsg(info, "block", "rgb(156, 4, 4)", "rgba(223, 52, 52,.4)")
         }
     }
     else {
-        msg.innerText = "Wrong credentials!";
-        msg.style.display = "block";
-        msg.style.color = "rgb(156, 4, 4)";
-        msg.style.backgroundColor = "rgba(223, 52, 52,.4)";
+        let info = "Wrong credentials!";
+        showMsg(info, "block", "rgb(156, 4, 4)", "rgba(223, 52, 52,.4)")
     }
 }
 getById("changePassBtn").addEventListener("click", (e) => {
